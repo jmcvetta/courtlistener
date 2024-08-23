@@ -37,7 +37,7 @@ export BULK_DB_NAME=courtlistener
 export PGPASSWORD=$BULK_DB_PASSWORD
 
 echo "Loading schema to database: "
-psql -f "$BULK_DIR"/ --host "$BULK_DB_HOST" --username "$BULK_DB_USER"
+psql -f "$BULK_DIR"/schema-2024-08-15.sql --host "$BULK_DB_HOST" --username "$BULK_DB_USER"
 
 echo "Loading people-db-people-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_person (
@@ -46,15 +46,15 @@ psql --command "\COPY public.people_db_person (
 	       date_dod, date_granularity_dod, dob_city, dob_state, dob_country,
 	       dod_city, dod_state, dod_country, gender, religion, ftm_total_received,
 	       ftm_eid, has_photo, is_alias_of_id
-	   ) FROM '$BULK_DIR/people-db-people-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-people-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people_db_race-2024-08-23.csv to database"
-psql --command "\COPY public.people_db_race (id, race) FROM '$BULK_DIR/people_db_race-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+psql --command "\COPY public.people_db_race (id, race) FROM '$BULK_DIR/people_db_race-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people-db-schools-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_school (
 	       id, date_created, date_modified, name, ein, is_alias_of_id
-	   ) FROM '$BULK_DIR/people-db-schools-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-schools-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading courts-2024-08-23.csv to database"
 psql --command "\COPY public.search_court (
@@ -62,7 +62,7 @@ psql --command "\COPY public.search_court (
 	       fjc_court_id, date_modified, in_use, has_opinion_scraper,
 	       has_oral_argument_scraper, position, citation_string, short_name, full_name,
 	       url, start_date, end_date, jurisdiction, notes, parent_court_id
-	       ) FROM '$BULK_DIR/courts-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	       ) FROM '$BULK_DIR/courts-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people-db-positions-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_position (
@@ -76,7 +76,7 @@ psql --command "\COPY public.people_db_position (
 	       voice_vote, votes_yes, votes_no, votes_yes_percent, votes_no_percent, how_selected,
 	       has_inferred_values, appointer_id, court_id, person_id, predecessor_id, school_id,
 	       supervisor_id
-	   ) FROM '$BULK_DIR/people-db-positions-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-positions-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading fjc-integrated-database-2024-08-23.csv to database"
 psql --command "\COPY public.recap_fjcintegrateddatabase (
@@ -90,7 +90,7 @@ psql --command "\COPY public.recap_fjcintegrateddatabase (
 	       termination_class_action_status, procedural_progress, disposition,
 	       nature_of_judgement, amount_received, judgment, pro_se,
 	       year_of_tape, nature_of_offense, version, circuit_id, district_id
-	   ) FROM '$BULK_DIR/fjc-integrated-database-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/fjc-integrated-database-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading originating-court-information-2024-08-23.csv to database"
 psql --command "\COPY public.search_originatingcourtinformation (
@@ -98,7 +98,7 @@ psql --command "\COPY public.search_originatingcourtinformation (
 	       ordering_judge_str, court_reporter, date_disposed, date_filed, date_judgment,
 	       date_judgment_eod, date_filed_noa, date_received_coa, assigned_to_id,
 	       ordering_judge_id
-	       ) FROM '$BULK_DIR/originating-court-information-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	       ) FROM '$BULK_DIR/originating-court-information-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading dockets-2024-08-23.csv to database"
 psql --command "\COPY public.search_docket (id, date_created, date_modified, source, appeal_from_str,
@@ -114,7 +114,7 @@ psql --command "\COPY public.search_docket (id, date_created, date_modified, sou
 	       court_id, idb_data_id, originating_court_information_id, referred_to_id,
 	       federal_dn_case_type, federal_dn_office_code, federal_dn_judge_initials_assigned,
 	       federal_dn_judge_initials_referred, federal_defendant_number, parent_docket_id
-	       ) FROM '$BULK_DIR/dockets-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	       ) FROM '$BULK_DIR/dockets-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading opinion-clusters-2024-08-23.csv to database"
 psql --command "\COPY public.search_opinioncluster (
@@ -126,17 +126,17 @@ psql --command "\COPY public.search_opinioncluster (
        history, other_dates, cross_reference, correction, citation_count,
        precedential_status, date_blocked, blocked, filepath_json_harvard,
 	       filepath_pdf_harvard, docket_id, arguments, headmatter
-   ) FROM '$BULK_DIR/opinion-clusters-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+   ) FROM '$BULK_DIR/opinion-clusters-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading search_opinioncluster_panel-2024-08-23.csv to database"
 psql --command "\COPY public.search_opinioncluster_panel (
 	       id, opinioncluster_id, person_id
-	   ) FROM '$BULK_DIR/search_opinioncluster_panel-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/search_opinioncluster_panel-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading search_opinioncluster_non_participating_judges-2024-08-23.csv to database"
 psql --command "\COPY public.search_opinioncluster_non_participating_judges (
 	       id, opinioncluster_id, person_id
-	   ) FROM '$BULK_DIR/search_opinioncluster_non_participating_judges-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/search_opinioncluster_non_participating_judges-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading opinions-2024-08-23.csv to database"
 psql --command "\COPY public.search_opinion (
@@ -144,34 +144,34 @@ psql --command "\COPY public.search_opinion (
 	       type, sha1, page_count, download_url, local_path, plain_text, html,
 	       html_lawbox, html_columbia, html_anon_2020, xml_harvard,
 	       html_with_citations, extracted_by_ocr, author_id, cluster_id
-	   ) FROM '$BULK_DIR/opinions-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/opinions-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading search_opinion_joined_by-2024-08-23.csv to database"
 psql --command "\COPY public.search_opinion_joined_by (
 			id, opinion_id, person_id
-) FROM '$BULK_DIR/search_opinion_joined_by-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+) FROM '$BULK_DIR/search_opinion_joined_by-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading courthouses-2024-08-23.csv to database"
 psql --command "\COPY public.search_courthouse (id, court_seat, building_name, address1, address2, city, county,
-state, zip_code, country_code, court_id) FROM '$BULK_DIR/courthouses-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+state, zip_code, country_code, court_id) FROM '$BULK_DIR/courthouses-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading court-appeals-to-2024-08-23.csv to database"
-psql --command "\COPY public.search_court_appeals_to (id, from_court_id, to_court_id) FROM '$BULK_DIR/court-appeals-to-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+psql --command "\COPY public.search_court_appeals_to (id, from_court_id, to_court_id) FROM '$BULK_DIR/court-appeals-to-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading citation-map-2024-08-23.csv to database"
 psql --command "\COPY public.search_opinionscited (
 	       id, depth, cited_opinion_id, citing_opinion_id
-	   ) FROM '$BULK_DIR/citation-map-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/citation-map-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading citations-2024-08-23.csv to database"
 psql --command "\COPY public.search_citation (
 	       id, volume, reporter, page, type, cluster_id
-	   ) FROM '$BULK_DIR/citations-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/citations-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading parentheticals-2024-08-23.csv to database"
 psql --command "\COPY public.search_parenthetical (
 	       id, text, score, described_opinion_id, describing_opinion_id, group_id
-	   ) FROM '$BULK_DIR/parentheticals-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/parentheticals-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading oral-arguments-2024-08-23.csv to database"
 psql --command "\COPY public.audio_audio (
@@ -180,39 +180,39 @@ psql --command "\COPY public.audio_audio (
 	       local_path_original_file, filepath_ia, ia_upload_failure_count, duration,
 	       processing_complete, date_blocked, blocked, stt_status, stt_transcript,
 	       stt_source, docket_id
-	   ) FROM '$BULK_DIR/oral-arguments-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/oral-arguments-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people-db-retention-events-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_retentionevent (
 	       id, date_created, date_modified, retention_type, date_retention,
 	       votes_yes, votes_no, votes_yes_percent, votes_no_percent, unopposed,
 	       won, position_id
-	   ) FROM '$BULK_DIR/people-db-retention-events-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-retention-events-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people-db-educations-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_education (
 	       id, date_created, date_modified, degree_level, degree_detail,
 	       degree_year, person_id, school_id
-	   ) FROM '$BULK_DIR/people-db-educations-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-educations-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people-db-political-affiliations-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_politicalaffiliation (
 	       id, date_created, date_modified, political_party, source,
 	       date_start, date_granularity_start, date_end,
 	       date_granularity_end, person_id
-	   ) FROM '$BULK_DIR/people-db-political-affiliations-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-political-affiliations-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading people-db-races-2024-08-23.csv to database"
 psql --command "\COPY public.people_db_person_race (
 	       id, person_id, race_id
-	   ) FROM '$BULK_DIR/people-db-races-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/people-db-races-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_financialdisclosure (
 	       id, date_created, date_modified, year, download_filepath, filepath, thumbnail,
 	       thumbnail_status, page_count, sha1, report_type, is_amended, addendum_content_raw,
 	       addendum_redacted, has_been_extracted, person_id
-	   ) FROM '$BULK_DIR/financial-disclosures-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosure-investments-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_investment (
@@ -222,47 +222,47 @@ psql --command "\COPY public.disclosures_investment (
 	       transaction_during_reporting_period, transaction_date_raw,
 	       transaction_date, transaction_value_code, transaction_gain_code,
 	       transaction_partner, has_inferred_values, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosure-investments-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosure-investments-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-positions-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_position (
 	       id, date_created, date_modified, position, organization_name,
 	       redacted, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-positions-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-positions-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-agreements-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_agreement (
 	       id, date_created, date_modified, date_raw, parties_and_terms,
 	       redacted, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-agreements-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-agreements-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-non-investment-income-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_noninvestmentincome (
 	       id, date_created, date_modified, date_raw, source_type,
 	       income_amount, redacted, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-non-investment-income-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-non-investment-income-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-spousal-income-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_spouseincome (
 	       id, date_created, date_modified, source_type, date_raw, redacted,
 	       financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-spousal-income-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-spousal-income-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-reimbursements-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_reimbursement (
 	       id, date_created, date_modified, source, date_raw, location,
 	       purpose, items_paid_or_provided, redacted, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-reimbursements-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-reimbursements-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-gifts-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_gift (
 	       id, date_created, date_modified, source, description, value,
 	       redacted, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-gifts-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-gifts-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
 echo "Loading financial-disclosures-debts-2024-08-23.csv to database"
 psql --command "\COPY public.disclosures_debt (
 	       id, date_created, date_modified, creditor_name, description,
 	       value_code, redacted, financial_disclosure_id
-	   ) FROM '$BULK_DIR/financial-disclosures-debts-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, QUOTE \'`\', HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
+	   ) FROM '$BULK_DIR/financial-disclosures-debts-2024-08-23.csv' WITH (FORMAT csv, ENCODING utf8, HEADER)" --host "$BULK_DB_HOST" --username "$BULK_DB_USER" --dbname "$BULK_DB_NAME"
 
