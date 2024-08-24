@@ -418,14 +418,17 @@ declare -a lst="$group"
 cat >> "$OUT" <<- EOF
 echo "Loading ${lst[2]} to database"
 psql --command \
-'COPY public.${lst[0]} ${lst[1]} FROM STDIN WITH (FORMAT csv, ENCODING utf8, QUOTE "\`", HEADER)' \
+'SET session_replication_role = replica; \
+COPY public.${lst[0]} ${lst[1]} FROM STDIN WITH (FORMAT csv, ENCODING utf8, QUOTE "\`", HEADER)' \
 --host "\$BULK_DB_HOST" \
 --username "\$BULK_DB_USER" \
 --dbname "\$BULK_DB_NAME" \
-< \$BULK_DIR/${lst[2]}
+< \$BULK_DIR/${lst[2]} &
 
 EOF
 done
+
+echo wait >> "$OUT"
 
 ## Start adding the code to the script to load the tables
 #for group in "${listOfLists[@]}"; do
@@ -449,5 +452,5 @@ echo $OUT
 # Remove the temp file when script ends to execute
 #trap "rm -f $OUT" EXIT
 
-cp -v $OUT load.sh
+cp -v $OUT quickload.sh
 echo "Done."
