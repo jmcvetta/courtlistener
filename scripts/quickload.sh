@@ -32,8 +32,8 @@ echo "Variable having name 'BULK_DB_PASSWORD' is not set."
 exit
 fi
 
-# Default from schema is 'courtlistener2'
-export BULK_DB_NAME=courtlistener_quick
+# Default from schema is 'courtlistener'
+export BULK_DB_NAME=courtlistener
 export PGPASSWORD=$BULK_DB_PASSWORD
 
 echo "Loading schema to database: "
